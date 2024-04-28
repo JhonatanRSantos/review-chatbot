@@ -41,12 +41,14 @@ func (cur *CreateUserRequest) Validate() error {
 	return nil
 }
 
+type CreateReviewUser struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
 type CreateReviewRequest struct {
-	User struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
-	} `json:"user"`
-	Product string `json:"product"`
+	User    CreateReviewUser `json:"user"`
+	Product string           `json:"product"`
 }
 
 func (crr *CreateReviewRequest) Validate() error {

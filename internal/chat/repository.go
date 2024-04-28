@@ -50,7 +50,7 @@ func (r *Repository) CreateChat(ctx context.Context, user datatypes.User) (strin
 	}
 
 	if rows == 0 {
-		return "", fmt.Errorf("failed to create new chat. Cause: %w", err)
+		return "", ErrCantCreateChat
 	}
 
 	return id.String(), nil
@@ -86,7 +86,7 @@ func (r *Repository) CreateMessage(ctx context.Context, chatID string, author st
 	}
 
 	if rows == 0 {
-		return datatypes.Message{}, fmt.Errorf("failed to create new message. Cause: %w", err)
+		return datatypes.Message{}, ErrCantCreateMessage
 	}
 
 	return datatypes.Message{

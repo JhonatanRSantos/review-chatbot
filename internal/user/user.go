@@ -2,7 +2,7 @@ package user
 
 import (
 	"context"
-	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/JhonatanRSantos/review-chatbot/internal/datatypes"
@@ -30,7 +30,7 @@ func (us *UserService) Create(
 	email string,
 ) (datatypes.User, error) {
 	if sliceHasEmptyStrings(firstName, lastName, email) {
-		return datatypes.User{}, errors.New("failed to create new user. Cause: missing required fields")
+		return datatypes.User{}, fmt.Errorf("failed to create new user. Cause: %w", ErrMissingRequiredFields)
 	}
 	return us.repository.Create(ctx, firstName, lastName, email)
 }
@@ -38,7 +38,7 @@ func (us *UserService) Create(
 // FindByEmail finds a user by email
 func (us *UserService) FindByEmail(ctx context.Context, email string) (datatypes.User, error) {
 	if sliceHasEmptyStrings(email) {
-		return datatypes.User{}, errors.New("failed to find user. Cause: missing required fields")
+		return datatypes.User{}, fmt.Errorf("failed to find user. Cause: %w", ErrMissingRequiredFields)
 	}
 	return us.repository.FindByEmail(ctx, email)
 }

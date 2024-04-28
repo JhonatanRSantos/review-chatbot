@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"errors"
 	"fmt"
 
 	"github.com/JhonatanRSantos/gocore/pkg/godb"
@@ -50,7 +49,7 @@ func (r *Repository) Create(ctx context.Context, firstName string, lastName stri
 	}
 
 	if rows == 0 {
-		return datatypes.User{}, errors.New("failed to create new user. Cause: can't save the user")
+		return datatypes.User{}, ErrCantSaveUser
 	}
 
 	return datatypes.User{
